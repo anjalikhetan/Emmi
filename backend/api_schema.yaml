@@ -1,0 +1,933 @@
+openapi: 3.0.3
+info:
+  title: Emmi V5 API
+  version: 1.0.0
+  description: Documentation of API endpoints of Emmi V5
+paths:
+  /api/auth-token/:
+    post:
+      operationId: auth_token_create
+      tags:
+      - auth-token
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+          description: ''
+  /api/schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/plans/{plan_id}/:
+    get:
+      operationId: v1_plans_retrieve
+      description: |-
+        Retrieve a specific training plan.
+
+        Returns all attributes of the Plan model in the response.
+        Ensures the plan belongs to the requesting user.
+      parameters:
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+          description: ''
+  /api/v1/plans/{plan_id}/workouts/:
+    get:
+      operationId: v1_plans_workouts_list
+      description: |-
+        List workouts for a specific training plan.
+
+        Returns all attributes of the Workout model for each item.
+        Implements pagination with 50 items per page.
+        Includes filter by date in YYYY-MM-DD format.
+        Ensures the plan belongs to the requesting user.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWorkoutList'
+          description: ''
+  /api/v1/plans/{plan_id}/workouts/{workout_id}/:
+    get:
+      operationId: v1_plans_workouts_retrieve
+      description: |-
+        Retrieve or update a specific workout.
+
+        GET: Return all attributes of the Workout model in the response.
+        PATCH: Allow partial updates to completion_status, difficulty, and additional_notes.
+
+        Ensures the workout's plan belongs to the requesting user.
+      parameters:
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: workout_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+          description: ''
+    patch:
+      operationId: v1_plans_workouts_partial_update
+      description: |-
+        Retrieve or update a specific workout.
+
+        GET: Return all attributes of the Workout model in the response.
+        PATCH: Allow partial updates to completion_status, difficulty, and additional_notes.
+
+        Ensures the workout's plan belongs to the requesting user.
+      parameters:
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: workout_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedWorkout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedWorkout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedWorkout'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+          description: ''
+  /api/v1/plans/generate/:
+    post:
+      operationId: v1_plans_generate_create
+      description: |-
+        Initiate the generation of a training plan for the authenticated user.
+
+        Returns:
+            Response with status 201 and plan details on success,
+            or error response with appropriate status code.
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/users/:
+    post:
+      operationId: v1_users_create
+      description: User view set
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUser'
+          description: ''
+  /api/v1/users/{id}/:
+    get:
+      operationId: v1_users_retrieve
+      description: User view set
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this user.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: v1_users_update
+      description: User view set
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this user.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: v1_users_partial_update
+      description: User view set
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this user.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/v1/users/me/:
+    get:
+      operationId: v1_users_me_retrieve
+      description: User view set
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/v1/users/verification-code/:
+    post:
+      operationId: v1_users_verification_code_create
+      description: |-
+        Send a verification code to the provided phone number.
+
+        Uses either:
+        1. Twilio Verify API if ENABLE_TWILIO_VERIFY is True and not a test number
+        2. The existing verification system otherwise
+
+        Returns:
+            HTTP 200 OK with success message if code sent successfully
+            HTTP 400 Bad Request with error details if validation fails
+            HTTP 500 Internal Server Error if Twilio API call fails
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhoneNumber'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PhoneNumber'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PhoneNumber'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneNumber'
+          description: ''
+  /api/v1/users/verify-code/:
+    post:
+      operationId: v1_users_verify_code_create
+      description: |-
+        Verify a verification code sent to a phone number.
+
+        Uses either:
+        1. Twilio Verify API if ENABLE_TWILIO_VERIFY is True and not a test number
+        2. The existing verification system otherwise
+
+        Returns:
+            HTTP 200 OK with success message and token if code is valid
+            HTTP 400 Bad Request with error details if validation fails
+            HTTP 400 Bad Request with error message if code is invalid or expired
+            HTTP 500 Internal Server Error if user creation fails
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyCode'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VerifyCode'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyCode'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyCode'
+          description: ''
+components:
+  schemas:
+    AuthToken:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        token:
+          type: string
+          readOnly: true
+      required:
+      - password
+      - token
+      - username
+    CompletionStatusEnum:
+      enum:
+      - completed
+      - modified
+      - skipped
+      - not_completed
+      type: string
+      description: |-
+        * `completed` - Completed as planned
+        * `modified` - Modified
+        * `skipped` - Skipped
+        * `not_completed` - Not completed
+    CreateUser:
+      type: object
+      description: User create serializer
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        password:
+          type: string
+          writeOnly: true
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        auth_token:
+          type: string
+          readOnly: true
+      required:
+      - auth_token
+      - email
+      - id
+      - password
+    PaginatedWorkoutList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workout'
+    PatchedUser:
+      type: object
+      description: User serializer with support for nested profile updates
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+        profile:
+          $ref: '#/components/schemas/Profile'
+        is_verified:
+          type: boolean
+          readOnly: true
+        current_plan:
+          type: string
+          readOnly: true
+    PatchedWorkout:
+      type: object
+      description: Serializer for the Workout model.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        date:
+          type: string
+          format: date
+          readOnly: true
+        workout_info:
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        completion_status:
+          $ref: '#/components/schemas/CompletionStatusEnum'
+        difficulty:
+          type: integer
+          maximum: 10
+          minimum: 1
+          nullable: true
+        additional_notes:
+          type: string
+          nullable: true
+        plan:
+          type: string
+          format: uuid
+          readOnly: true
+    PhoneNumber:
+      type: object
+      description: Serializer for phone number validation.
+      properties:
+        phone_number:
+          type: string
+      required:
+      - phone_number
+    Plan:
+      type: object
+      description: Serializer for the Plan model.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        generation_completed_at:
+          type: string
+          format: date-time
+          nullable: true
+        generation_error:
+          type: string
+          nullable: true
+        plan_info:
+          nullable: true
+        user:
+          type: string
+          format: uuid
+      required:
+      - created_at
+      - id
+      - user
+    Profile:
+      type: object
+      description: User Profile serializer with field-level validation
+      properties:
+        avatar:
+          type: string
+          format: uri
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 128
+        is_onboarding_complete:
+          type: boolean
+        age:
+          type: integer
+          maximum: 120
+          minimum: 18
+          nullable: true
+        feet:
+          type: integer
+          maximum: 8
+          minimum: 1
+          nullable: true
+        inches:
+          type: integer
+          maximum: 11
+          minimum: 0
+          nullable: true
+        heightCm:
+          type: number
+          format: double
+          maximum: 250
+          minimum: 100
+          nullable: true
+        weightKg:
+          type: number
+          format: double
+          maximum: 500
+          minimum: 10
+          nullable: true
+        weightLbs:
+          type: number
+          format: double
+          maximum: 1100
+          minimum: 22
+          nullable: true
+        goals:
+          nullable: true
+        goalsDetails:
+          type: string
+          nullable: true
+        raceName:
+          type: string
+          nullable: true
+          maxLength: 255
+        raceDate:
+          type: string
+          format: date
+          nullable: true
+        distance:
+          type: string
+          nullable: true
+          maxLength: 50
+        timeGoal:
+          type: string
+          nullable: true
+          maxLength: 50
+        runningExperience:
+          type: string
+          nullable: true
+        routineDaysPerWeek:
+          type: string
+          nullable: true
+          maxLength: 50
+        routineMilesPerWeek:
+          type: string
+          nullable: true
+          maxLength: 50
+        routineEasyPace:
+          type: string
+          nullable: true
+          maxLength: 50
+        routineLongestRun:
+          type: string
+          nullable: true
+          maxLength: 50
+        recentRaceResults:
+          type: string
+          nullable: true
+        extraTraining:
+          nullable: true
+        diet:
+          nullable: true
+        injuries:
+          type: string
+          nullable: true
+        daysCommitTraining:
+          type: string
+          nullable: true
+          maxLength: 50
+        preferredLongRunDays:
+          nullable: true
+        preferredWorkoutDays:
+          nullable: true
+        preferredRestDays:
+          nullable: true
+        otherObligations:
+          type: string
+          nullable: true
+        pastProblems:
+          nullable: true
+        moreInfo:
+          type: string
+          nullable: true
+    User:
+      type: object
+      description: User serializer with support for nested profile updates
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+        profile:
+          $ref: '#/components/schemas/Profile'
+        is_verified:
+          type: boolean
+          readOnly: true
+        current_plan:
+          type: string
+          readOnly: true
+      required:
+      - current_plan
+      - email
+      - id
+      - is_verified
+    VerifyCode:
+      type: object
+      description: Serializer for verification code validation.
+      properties:
+        phone_number:
+          type: string
+        verification_code:
+          type: string
+      required:
+      - phone_number
+      - verification_code
+    Workout:
+      type: object
+      description: Serializer for the Workout model.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        date:
+          type: string
+          format: date
+          readOnly: true
+        workout_info:
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        completion_status:
+          $ref: '#/components/schemas/CompletionStatusEnum'
+        difficulty:
+          type: integer
+          maximum: 10
+          minimum: 1
+          nullable: true
+        additional_notes:
+          type: string
+          nullable: true
+        plan:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - created_at
+      - date
+      - id
+      - plan
+      - workout_info
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"

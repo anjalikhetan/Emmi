@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+
+# Migrate the database
+python manage.py migrate
+
+echo "Starting Django Development Server..."
+exec python manage.py runserver 0.0.0.0:8000

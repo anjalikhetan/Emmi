@@ -1,0 +1,36 @@
+volumes:
+  a4507d3e__emmi-v5_backend_postgres_data: {}
+  a4507d3e__emmi-v5_backend_postgres_data_backups: {}
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./compose/Dockerfile
+    image: a4507d3e__emmi-v5_backend_django_staging
+    container_name: a4507d3e__emmi-v5_backend_django_staging
+    volumes:
+      - ./backend:/app
+    env_file:
+      - ./backend/.envs/.local/.django
+      - ./backend/.envs/.local/.postgres
+    ports:
+      - '${BACKEND_PORT:-8001}:8000'
+    command: /start
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./compose/Dockerfile
+    image: a4507d3e__emmi-v5_frontend_nextjs_staging
+    container_name: a4507d3e__emmi-v5_frontend_nextjs_staging
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      # Don't mount node_modules and .next to avoid conflicts
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - '${FRONTEND_PORT:-3001}:3000'
+    command: "npm run dev"

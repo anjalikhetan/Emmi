@@ -1,0 +1,35 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
+
+
+# Frontend
+# ------------------------------------------------------------------------------
+FRONTEND_BASE_URL=http://localhost:3001
+
+# Twilio
+# ------------------------------------------------------------------------------
+TWILIO_ACCOUNT_SID=<your twilio account sid>
+TWILIO_AUTH_TOKEN=<your twilio auth token>
+TWILIO_PHONE_NUMBER=<your twilio phone number>
+TWILIO_VERIFY_SERVICE_SID=<your twilio verify service sid>
+ENABLE_TWILIO_VERIFY=true
+
+# OpenAI
+# ------------------------------------------------------------------------------
+OPENAI_API_KEY=<your openai api key>
+
+# Anthropic
+# ------------------------------------------------------------------------------
+ANTHROPIC_API_KEY=<your anthropic api key>
+
+# Langfuse
+# ------------------------------------------------------------------------------
+LANGFUSE_SECRET_KEY=<your langfuse secret key>
+LANGFUSE_PUBLIC_KEY=<your langfuse public key>
+LANGFUSE_HOST=https://us.cloud.langfuse.com
+
+# Mixpanel
+MIXPANEL_PROJECT_TOKEN=<your mixpanel project token>
+MIXPANEL_ENABLED=true

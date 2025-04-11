@@ -1,0 +1,8 @@
+services:
+  backend:
+    volumes:
+      - ${CLIENT_CODEBASES_PATH}/a4507d3e__emmi-v5/backend:/app
+
+  frontend:
+    volumes:
+      - ${CLIENT_CODEBASES_PATH}/a4507d3e__emmi-v5/frontend:/app
