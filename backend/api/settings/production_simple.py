@@ -115,4 +115,7 @@ CORS_ALLOWED_ORIGINS = [
 # Tools that generate code samples can use SERVERS to point to the correct domain
 SPECTACULAR_SETTINGS["SERVERS"] = [
     {"url": "https://turbo.dev", "description": "Production server"},
-] 
+]
+
+# Add this at the end of the file for Railway/Nixpacks compatibility
+WSGI_APPLICATION = "api.wsgi.application" 
