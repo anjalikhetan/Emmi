@@ -1,0 +1,12 @@
+# Ignore env files
+backend/.envs/
+
+# macOS system files
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/e
