@@ -60,10 +60,6 @@ TWILIO_PHONE_NUMBER=<your twilio phone number>
 TWILIO_VERIFY_SERVICE_SID=<your twilio verify service sid>
 ENABLE_TWILIO_VERIFY=true
 
-# OpenAI
-# ------------------------------------------------------------------------------
-OPENAI_API_KEY=<your openai api key>
-
 # Anthropic
 # ------------------------------------------------------------------------------
 ANTHROPIC_API_KEY=<your anthropic api key>
@@ -114,13 +110,13 @@ A superuser account is necessary to access and manage the Django Admin panel. It
 1.  **Navigate to the Project Directory**
     Open a terminal and move to the directory where the project is located:
     `bash
-    cd path/to/your/project
-    `
+cd path/to/your/project
+`
 2.  **Run the Superuser Creation Command**
     Use the following command to create a superuser:
     `bash
-    docker-compose run --rm backend python manage.py createsuperuser
-    `
+docker-compose run --rm backend python manage.py createsuperuser
+`
 3.  **Provide Superuser Details**
     - **Email:** Enter the email address for the superuser (e.g., `admin@example.com`).
     - **Username:** Choose a username for the superuser (e.g., `admin`).
@@ -135,13 +131,13 @@ A superuser account is necessary to access and manage the Django Admin panel. It
 1.  **Run the Application**
     Ensure the project is running:
     `bash
-    docker-compose up
-    `
+docker-compose up
+`
 2.  **Open Django Admin in a Browser**
     Navigate to the admin panel:
     `bash
-    http://localhost:8001/admin
-    `
+http://localhost:8001/admin
+`
 3.  **Log In**
     Use the credentials (email/username and password) you set during superuser creation.
 
