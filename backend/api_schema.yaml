@@ -8,29 +8,29 @@ paths:
     post:
       operationId: auth_token_create
       tags:
-      - auth-token
+        - auth-token
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/AuthToken'
+              $ref: "#/components/schemas/AuthToken"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/AuthToken'
+              $ref: "#/components/schemas/AuthToken"
           application/json:
             schema:
-              $ref: '#/components/schemas/AuthToken'
+              $ref: "#/components/schemas/AuthToken"
         required: true
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthToken'
-          description: ''
+                $ref: "#/components/schemas/AuthToken"
+          description: ""
   /api/schema/:
     get:
       operationId: schema_retrieve
@@ -40,123 +40,123 @@ paths:
         - YAML: application/vnd.oai.openapi
         - JSON: application/vnd.oai.openapi+json
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - yaml
-      - in: query
-        name: lang
-        schema:
-          type: string
-          enum:
-          - af
-          - ar
-          - ar-dz
-          - ast
-          - az
-          - be
-          - bg
-          - bn
-          - br
-          - bs
-          - ca
-          - ckb
-          - cs
-          - cy
-          - da
-          - de
-          - dsb
-          - el
-          - en
-          - en-au
-          - en-gb
-          - eo
-          - es
-          - es-ar
-          - es-co
-          - es-mx
-          - es-ni
-          - es-ve
-          - et
-          - eu
-          - fa
-          - fi
-          - fr
-          - fy
-          - ga
-          - gd
-          - gl
-          - he
-          - hi
-          - hr
-          - hsb
-          - hu
-          - hy
-          - ia
-          - id
-          - ig
-          - io
-          - is
-          - it
-          - ja
-          - ka
-          - kab
-          - kk
-          - km
-          - kn
-          - ko
-          - ky
-          - lb
-          - lt
-          - lv
-          - mk
-          - ml
-          - mn
-          - mr
-          - ms
-          - my
-          - nb
-          - ne
-          - nl
-          - nn
-          - os
-          - pa
-          - pl
-          - pt
-          - pt-br
-          - ro
-          - ru
-          - sk
-          - sl
-          - sq
-          - sr
-          - sr-latn
-          - sv
-          - sw
-          - ta
-          - te
-          - tg
-          - th
-          - tk
-          - tr
-          - tt
-          - udm
-          - uk
-          - ur
-          - uz
-          - vi
-          - zh-hans
-          - zh-hant
+        - in: query
+          name: format
+          schema:
+            type: string
+            enum:
+              - json
+              - yaml
+        - in: query
+          name: lang
+          schema:
+            type: string
+            enum:
+              - af
+              - ar
+              - ar-dz
+              - ast
+              - az
+              - be
+              - bg
+              - bn
+              - br
+              - bs
+              - ca
+              - ckb
+              - cs
+              - cy
+              - da
+              - de
+              - dsb
+              - el
+              - en
+              - en-au
+              - en-gb
+              - eo
+              - es
+              - es-ar
+              - es-co
+              - es-mx
+              - es-ni
+              - es-ve
+              - et
+              - eu
+              - fa
+              - fi
+              - fr
+              - fy
+              - ga
+              - gd
+              - gl
+              - he
+              - hi
+              - hr
+              - hsb
+              - hu
+              - hy
+              - ia
+              - id
+              - ig
+              - io
+              - is
+              - it
+              - ja
+              - ka
+              - kab
+              - kk
+              - km
+              - kn
+              - ko
+              - ky
+              - lb
+              - lt
+              - lv
+              - mk
+              - ml
+              - mn
+              - mr
+              - ms
+              - my
+              - nb
+              - ne
+              - nl
+              - nn
+              - os
+              - pa
+              - pl
+              - pt
+              - pt-br
+              - ro
+              - ru
+              - sk
+              - sl
+              - sq
+              - sr
+              - sr-latn
+              - sv
+              - sw
+              - ta
+              - te
+              - tg
+              - th
+              - tk
+              - tr
+              - tt
+              - udm
+              - uk
+              - ur
+              - uz
+              - vi
+              - zh-hans
+              - zh-hant
       tags:
-      - schema
+        - schema
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/vnd.oai.openapi:
               schema:
@@ -174,7 +174,7 @@ paths:
               schema:
                 type: object
                 additionalProperties: {}
-          description: ''
+          description: ""
   /api/v1/plans/{plan_id}/:
     get:
       operationId: v1_plans_retrieve
@@ -184,24 +184,24 @@ paths:
         Returns all attributes of the Plan model in the response.
         Ensures the plan belongs to the requesting user.
       parameters:
-      - in: path
-        name: plan_id
-        schema:
-          type: string
-          format: uuid
-        required: true
+        - in: path
+          name: plan_id
+          schema:
+            type: string
+            format: uuid
+          required: true
       tags:
-      - v1
+        - v1
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Plan'
-          description: ''
+                $ref: "#/components/schemas/Plan"
+          description: ""
   /api/v1/plans/{plan_id}/workouts/:
     get:
       operationId: v1_plans_workouts_list
@@ -213,30 +213,30 @@ paths:
         Includes filter by date in YYYY-MM-DD format.
         Ensures the plan belongs to the requesting user.
       parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - in: path
-        name: plan_id
-        schema:
-          type: string
-          format: uuid
-        required: true
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+        - in: path
+          name: plan_id
+          schema:
+            type: string
+            format: uuid
+          required: true
       tags:
-      - v1
+        - v1
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedWorkoutList'
-          description: ''
+                $ref: "#/components/schemas/PaginatedWorkoutList"
+          description: ""
   /api/v1/plans/{plan_id}/workouts/{workout_id}/:
     get:
       operationId: v1_plans_workouts_retrieve
@@ -248,30 +248,30 @@ paths:
 
         Ensures the workout's plan belongs to the requesting user.
       parameters:
-      - in: path
-        name: plan_id
-        schema:
-          type: string
-          format: uuid
-        required: true
-      - in: path
-        name: workout_id
-        schema:
-          type: string
-          format: uuid
-        required: true
+        - in: path
+          name: plan_id
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - in: path
+          name: workout_id
+          schema:
+            type: string
+            format: uuid
+          required: true
       tags:
-      - v1
+        - v1
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Workout'
-          description: ''
+                $ref: "#/components/schemas/Workout"
+          description: ""
     patch:
       operationId: v1_plans_workouts_partial_update
       description: |-
@@ -282,41 +282,41 @@ paths:
 
         Ensures the workout's plan belongs to the requesting user.
       parameters:
-      - in: path
-        name: plan_id
-        schema:
-          type: string
-          format: uuid
-        required: true
-      - in: path
-        name: workout_id
-        schema:
-          type: string
-          format: uuid
-        required: true
+        - in: path
+          name: plan_id
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - in: path
+          name: workout_id
+          schema:
+            type: string
+            format: uuid
+          required: true
       tags:
-      - v1
+        - v1
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedWorkout'
+              $ref: "#/components/schemas/PatchedWorkout"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedWorkout'
+              $ref: "#/components/schemas/PatchedWorkout"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedWorkout'
+              $ref: "#/components/schemas/PatchedWorkout"
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Workout'
-          description: ''
+                $ref: "#/components/schemas/Workout"
+          description: ""
   /api/v1/plans/generate/:
     post:
       operationId: v1_plans_generate_create
@@ -327,150 +327,150 @@ paths:
             Response with status 201 and plan details on success,
             or error response with appropriate status code.
       tags:
-      - v1
+        - v1
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           description: No response body
   /api/v1/users/:
     post:
       operationId: v1_users_create
       description: User view set
       tags:
-      - v1
+        - v1
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateUser'
+              $ref: "#/components/schemas/CreateUser"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/CreateUser'
+              $ref: "#/components/schemas/CreateUser"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/CreateUser'
+              $ref: "#/components/schemas/CreateUser"
         required: true
       security:
-      - cookieAuth: []
-      - tokenAuth: []
-      - {}
+        - cookieAuth: []
+        - tokenAuth: []
+        - {}
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateUser'
-          description: ''
+                $ref: "#/components/schemas/CreateUser"
+          description: ""
   /api/v1/users/{id}/:
     get:
       operationId: v1_users_retrieve
       description: User view set
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this user.
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: A UUID string identifying this user.
+          required: true
       tags:
-      - v1
+        - v1
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+                $ref: "#/components/schemas/User"
+          description: ""
     put:
       operationId: v1_users_update
       description: User view set
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this user.
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: A UUID string identifying this user.
+          required: true
       tags:
-      - v1
+        - v1
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+                $ref: "#/components/schemas/User"
+          description: ""
     patch:
       operationId: v1_users_partial_update
       description: User view set
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this user.
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: A UUID string identifying this user.
+          required: true
       tags:
-      - v1
+        - v1
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: "#/components/schemas/PatchedUser"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: "#/components/schemas/PatchedUser"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: "#/components/schemas/PatchedUser"
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+                $ref: "#/components/schemas/User"
+          description: ""
   /api/v1/users/me/:
     get:
       operationId: v1_users_me_retrieve
       description: User view set
       tags:
-      - v1
+        - v1
       security:
-      - cookieAuth: []
-      - tokenAuth: []
+        - cookieAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+                $ref: "#/components/schemas/User"
+          description: ""
   /api/v1/users/verification-code/:
     post:
       operationId: v1_users_verification_code_create
@@ -486,30 +486,30 @@ paths:
             HTTP 400 Bad Request with error details if validation fails
             HTTP 500 Internal Server Error if Twilio API call fails
       tags:
-      - v1
+        - v1
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PhoneNumber'
+              $ref: "#/components/schemas/PhoneNumber"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PhoneNumber'
+              $ref: "#/components/schemas/PhoneNumber"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PhoneNumber'
+              $ref: "#/components/schemas/PhoneNumber"
         required: true
       security:
-      - cookieAuth: []
-      - tokenAuth: []
-      - {}
+        - cookieAuth: []
+        - tokenAuth: []
+        - {}
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PhoneNumber'
-          description: ''
+                $ref: "#/components/schemas/PhoneNumber"
+          description: ""
   /api/v1/users/verify-code/:
     post:
       operationId: v1_users_verify_code_create
@@ -526,30 +526,30 @@ paths:
             HTTP 400 Bad Request with error message if code is invalid or expired
             HTTP 500 Internal Server Error if user creation fails
       tags:
-      - v1
+        - v1
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VerifyCode'
+              $ref: "#/components/schemas/VerifyCode"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/VerifyCode'
+              $ref: "#/components/schemas/VerifyCode"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/VerifyCode'
+              $ref: "#/components/schemas/VerifyCode"
         required: true
       security:
-      - cookieAuth: []
-      - tokenAuth: []
-      - {}
+        - cookieAuth: []
+        - tokenAuth: []
+        - {}
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VerifyCode'
-          description: ''
+                $ref: "#/components/schemas/VerifyCode"
+          description: ""
 components:
   schemas:
     AuthToken:
@@ -565,15 +565,15 @@ components:
           type: string
           readOnly: true
       required:
-      - password
-      - token
-      - username
+        - password
+        - token
+        - username
     CompletionStatusEnum:
       enum:
-      - completed
-      - modified
-      - skipped
-      - not_completed
+        - completed
+        - modified
+        - skipped
+        - not_completed
       type: string
       description: |-
         * `completed` - Completed as planned
@@ -605,15 +605,15 @@ components:
           type: string
           readOnly: true
       required:
-      - auth_token
-      - email
-      - id
-      - password
+        - auth_token
+        - email
+        - id
+        - password
     PaginatedWorkoutList:
       type: object
       required:
-      - count
-      - results
+        - count
+        - results
       properties:
         count:
           type: integer
@@ -631,7 +631,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/Workout'
+            $ref: "#/components/schemas/Workout"
     PatchedUser:
       type: object
       description: User serializer with support for nested profile updates
@@ -651,7 +651,7 @@ components:
           format: email
           readOnly: true
         profile:
-          $ref: '#/components/schemas/Profile'
+          $ref: "#/components/schemas/Profile"
         is_verified:
           type: boolean
           readOnly: true
@@ -677,7 +677,7 @@ components:
           format: date-time
           readOnly: true
         completion_status:
-          $ref: '#/components/schemas/CompletionStatusEnum'
+          $ref: "#/components/schemas/CompletionStatusEnum"
         difficulty:
           type: integer
           maximum: 10
@@ -697,7 +697,7 @@ components:
         phone_number:
           type: string
       required:
-      - phone_number
+        - phone_number
     Plan:
       type: object
       description: Serializer for the Plan model.
@@ -723,9 +723,9 @@ components:
           type: string
           format: uuid
       required:
-      - created_at
-      - id
-      - user
+        - created_at
+        - id
+        - user
     Profile:
       type: object
       description: User Profile serializer with field-level validation
@@ -860,7 +860,7 @@ components:
           format: email
           readOnly: true
         profile:
-          $ref: '#/components/schemas/Profile'
+          $ref: "#/components/schemas/Profile"
         is_verified:
           type: boolean
           readOnly: true
@@ -868,10 +868,10 @@ components:
           type: string
           readOnly: true
       required:
-      - current_plan
-      - email
-      - id
-      - is_verified
+        - current_plan
+        - email
+        - id
+        - is_verified
     VerifyCode:
       type: object
       description: Serializer for verification code validation.
@@ -881,8 +881,8 @@ components:
         verification_code:
           type: string
       required:
-      - phone_number
-      - verification_code
+        - phone_number
+        - verification_code
     Workout:
       type: object
       description: Serializer for the Workout model.
@@ -902,7 +902,7 @@ components:
           format: date-time
           readOnly: true
         completion_status:
-          $ref: '#/components/schemas/CompletionStatusEnum'
+          $ref: "#/components/schemas/CompletionStatusEnum"
         difficulty:
           type: integer
           maximum: 10
@@ -916,11 +916,11 @@ components:
           format: uuid
           readOnly: true
       required:
-      - created_at
-      - date
-      - id
-      - plan
-      - workout_info
+        - created_at
+        - date
+        - id
+        - plan
+        - workout_info
   securitySchemes:
     cookieAuth:
       type: apiKey
