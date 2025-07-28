@@ -61,6 +61,8 @@ class UserViewSet(mixins.RetrieveModelMixin,
         )
         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
+# TODO(anjalikhetan): Rename this to PhoneVerificationView. This is the api used when a user enters their phone number
+# to receive a verification code.
 class VerificationCodeView(APIView):
     """
     API endpoint for sending verification codes to phone numbers.
@@ -177,7 +179,7 @@ class VerificationCodeView(APIView):
 
 class VerifyCodeView(APIView):
     """
-    API endpoint for verifying verification codes sent to phone numbers.
+    API endpoint for verifying the code provided by the user.
     If verification is successful, performs user authentication:
     - If a user exists with the phone number, returns their auth token
     - If no user exists, creates a new user and returns their auth token
