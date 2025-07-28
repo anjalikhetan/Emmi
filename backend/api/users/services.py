@@ -141,6 +141,7 @@ class TwilioMessagingService:
     def is_test_phone_number(self, phone_number: str) -> bool:
         """
         Check if a phone number is a Twilio test number.
+        More info: https://www.twilio.com/docs/iam/test-credentials#test-sms-messages-parameters-from
         
         Args:
             phone_number: The phone number to check (E.164 format)
@@ -153,7 +154,9 @@ class TwilioMessagingService:
         
     def should_use_twilio_verify(self, phone_number: str) -> bool:
         """
-        Determine if Twilio Verify API should be used based on feature flag and phone number.
+        Use Twilio Verify API if:
+        - Feature is enabled.
+        - Phone # is neither a test number or the Emmi source from number.
         
         Args:
             phone_number: The phone number to check (E.164 format)
@@ -163,6 +166,9 @@ class TwilioMessagingService:
         """
         # Always use the existing system for test phone numbers
         if self.is_test_phone_number(phone_number):
+            return False
+        
+        if self.from_number and phone_number == self.from_number:
             return False
             
         # Use Twilio Verify API if enabled in settings
@@ -199,6 +205,7 @@ class TwilioMessagingService:
         try:
             logger.info(f"Sending verification code to {phone_number} via {channel}")
             
+            # TODO(anjalikhetan): Add back in Debug settings.
             # # For testing, don't actually make the API call
             # if settings.DEBUG:
             #     logger.info("DEBUG mode: Skipping actual Twilio Verify API call")
