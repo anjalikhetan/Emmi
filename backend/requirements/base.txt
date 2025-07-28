@@ -20,15 +20,15 @@ django-json-widget==1.1.1  # https://github.com/jmrivas86/django-json-widget
 pytz==2025.2  # https://github.com/stub42/pytz
 
 # Langchain
-langchain==0.3.17
-langchain-openai==0.3.3
-langchain_anthropic==0.3.6
+langchain==0.2.17
+langchain-openai==0.1.25
+langchain_anthropic==0.1.23
 
 # Twilio for SMS services
 twilio==9.5.0  # https://github.com/twilio/twilio-python
 
 # Langfuse
-langfuse==2.60.2
+langfuse==2.54.1
 
 # Mixpanel
 mixpanel==4.10.0

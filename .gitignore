@@ -1,6 +1,10 @@
 # Ignore env files
 backend/.envs/
 
+# Ignore venv files
+backend/venv/
+frontend/venv/
+
 # macOS system files
 .DS_Store
 
