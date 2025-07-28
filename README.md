@@ -109,14 +109,16 @@ A superuser account is necessary to access and manage the Django Admin panel. It
 
 1.  **Navigate to the Project Directory**
     Open a terminal and move to the directory where the project is located:
-    `bash
-cd path/to/your/project
-`
+    ```bash
+    cd path/to/your/project
+    ```
 2.  **Run the Superuser Creation Command**
     Use the following command to create a superuser:
-    `bash
-docker-compose run --rm backend python manage.py createsuperuser
-`
+
+    ```bash
+    docker-compose run --rm backend python manage.py createsuperuser
+    ```
+
 3.  **Provide Superuser Details**
     - **Email:** Enter the email address for the superuser (e.g., `admin@example.com`).
     - **Username:** Choose a username for the superuser (e.g., `admin`).
@@ -130,14 +132,14 @@ docker-compose run --rm backend python manage.py createsuperuser
 
 1.  **Run the Application**
     Ensure the project is running:
-    `bash
-docker-compose up
-`
+
+    ```bash
+    docker-compose up
+    ```
+
 2.  **Open Django Admin in a Browser**
-    Navigate to the admin panel:
-    `bash
-http://localhost:8001/admin
-`
+    Navigate to the admin panel: http://localhost:8001/admin
+
 3.  **Log In**
     Use the credentials (email/username and password) you set during superuser creation.
 
@@ -146,5 +148,3 @@ http://localhost:8001/admin
 - **Local Development:** The superuser created locally only applies to your development environment. You’ll need to repeat the process for production.
 - **Password Security:** Use a strong password and avoid reusing production credentials in development.
 - **Managing Permissions:** Once inside the admin panel, you can assign roles and permissions to other users to restrict access as needed.
-
-_Project built by Turbo AI_
