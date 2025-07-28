@@ -1,9 +1,9 @@
 # Ignore env files
 backend/.envs/
 
-# Ignore venv files
+# Ignore local env files
 backend/venv/
-frontend/venv/
+frontend/node_modules/
 
 # macOS system files
 .DS_Store
