@@ -4,7 +4,7 @@ FROM docker.io/python:3.12.4-slim-bookworm AS python
 # Python build stage
 FROM python AS python-build-stage
 
-ARG BUILD_ENVIRONMENT=local
+ARG BUILD_ENVIRONMENT=production
 
 # Install apt packages
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -16,14 +16,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
 
-# Create Python Dependency and Sub-Dependency Wheels.
+# Install requirements, & create Python Dependency and Sub-Dependency Wheels.
+RUN pip install -r ${BUILD_ENVIRONMENT}.txt
 RUN pip wheel --wheel-dir /usr/src/app/wheels  \
   -r ${BUILD_ENVIRONMENT}.txt
 
 # Python 'run' stage
 FROM python AS python-run-stage
 
-ARG BUILD_ENVIRONMENT=local
 ARG APP_HOME=/app
 
 ENV PYTHONUNBUFFERED 1
