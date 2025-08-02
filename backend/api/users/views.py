@@ -72,7 +72,8 @@ class HealthCheckView(APIView):
         """
         Returns a simple response indicating the API is healthy.
         """
-        return Response({"status": "ok"}, status=status.HTTP_200_OK)
+        from django.http import HttpResponse
+        return HttpResponse("ok", content_type="text/plain", status=200)
 
 
 # TODO(anjalikhetan): Rename this to PhoneVerificationView. This is the api used when a user enters their phone number
