@@ -17,7 +17,10 @@ COPY . .
 EXPOSE 3000
 
 # Set environment variable for development
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 
-# Run the development server
-CMD ["npm", "run", "dev"]
+# Build the Next.js app
+RUN npm run build
+
+# Run the production server
+CMD ["npm", "start"]
