@@ -23,4 +23,4 @@ ENV NODE_ENV=production
 RUN npm run build
 
 # Run the production server
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
