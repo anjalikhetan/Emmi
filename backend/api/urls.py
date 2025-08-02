@@ -27,7 +27,7 @@ urlpatterns = [
 # API Router
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r'health', HealthCheckView)
+router.register(r'health', HealthCheckView, basename='health')
 
 # API URLS
 urlpatterns += [
