@@ -11,7 +11,7 @@ from drf_spectacular.views import SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 
-from api.users.views import UserViewSet, VerificationCodeView, VerifyCodeView
+from api.users.views import HealthCheckView, UserViewSet, VerificationCodeView, VerifyCodeView
 from api.plans.views import (
     TrainingPlanGenerateView, PlanDetailView, 
     WorkoutListView, WorkoutDetailView
@@ -27,6 +27,7 @@ urlpatterns = [
 # API Router
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'health', HealthCheckView)
 
 # API URLS
 urlpatterns += [

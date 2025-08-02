@@ -61,6 +61,20 @@ class UserViewSet(mixins.RetrieveModelMixin,
         )
         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
+
+class HealthCheckView(APIView):
+    """
+    Health check endpoint to verify if the API is running.
+    """
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        """
+        Returns a simple response indicating the API is healthy.
+        """
+        return Response({"status": "ok"}, status=status.HTTP_200_OK)
+
+
 # TODO(anjalikhetan): Rename this to PhoneVerificationView. This is the api used when a user enters their phone number
 # to receive a verification code.
 class VerificationCodeView(APIView):
