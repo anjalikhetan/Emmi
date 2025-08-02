@@ -31,7 +31,7 @@ router.register(r'users', UserViewSet)
 # API URLS
 urlpatterns += [
     # Health check endpoint
-    path('api/v1/health/', HealthCheckView.as_view(), name='health-check'),
+    path('api/v1/health', HealthCheckView.as_view(), name='health-check'),
     # Verification code endpoints
     path('api/v1/users/verification-code/', VerificationCodeView.as_view(), name='verification-code'),
     path('api/v1/users/verify-code/', VerifyCodeView.as_view(), name='verify-code'),
