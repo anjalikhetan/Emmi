@@ -5,10 +5,12 @@ This is the simplified approach - just the essentials to get your app live!
 ## 📋 What You Need
 
 ### 1. **Railway Account**
+
 - Sign up at [railway.app](https://railway.app)
 - Connect your GitHub account
 
 ### 2. **Twilio Account** (for SMS verification)
+
 - Sign up at [twilio.com](https://twilio.com)
 - Get your Account SID, Auth Token, and Phone Number
 
@@ -68,7 +70,7 @@ Add these variables to your frontend service:
 
 ```bash
 NODE_ENV=production
-NEXT_PUBLIC_API_URL=https://your-backend-service-url.railway.app
+NEXT_PUBLIC_API_BASE_URL=https://your-backend-service-url.railway.app
 ```
 
 ## 🎯 What This Gives You
@@ -89,6 +91,7 @@ NEXT_PUBLIC_API_URL=https://your-backend-service-url.railway.app
 ## 🔧 How to Generate Secret Key
 
 Run this in your terminal:
+
 ```bash
 cd Emmi/backend
 python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
@@ -97,6 +100,7 @@ python -c "from django.core.management.utils import get_random_secret_key; print
 ## 🎉 You're Done!
 
 Once deployed:
+
 - Your backend will be at: `https://your-backend-service.railway.app`
 - Your frontend will be at: `https://your-frontend-service.railway.app`
 - Your API will be at: `https://your-backend-service.railway.app/api/v1/`
@@ -104,9 +108,10 @@ Once deployed:
 ## 🔄 Adding More Services Later
 
 When you're ready, you can add:
+
 1. **AWS S3** for file uploads
 2. **Mailgun** for email notifications
 3. **Redis** for better performance
 4. **Custom domain** for your app
 
-But for now, this minimal setup will get you live and working! 🚀 
+But for now, this minimal setup will get you live and working! 🚀
