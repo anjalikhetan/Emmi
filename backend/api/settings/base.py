@@ -259,6 +259,10 @@ FRONTEND_BASE_URL = env("FRONTEND_BASE_URL", default="http://localhost:3001")
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
+
+# TODO(anjali): Remove this after testing.
+CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOWED_ORIGINS = [
     FRONTEND_BASE_URL,
 ]
