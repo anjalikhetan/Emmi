@@ -93,6 +93,7 @@ class TwilioMessagingService:
             media_url: Optional URL to media to include in the message (MMS)
         
         Returns:
+            #TODO: This return value isnt' used.
             The SID of the sent message if successful
             
         Raises:
@@ -121,12 +122,10 @@ class TwilioMessagingService:
             if media_url:
                 message_params['media_url'] = [media_url]
             
-            # TODO: Uncomment this line to actually send the message
             # Send the message
-            # twilio_message = client.messages.create(**message_params)
-            twilio_message = type('obj', (), {'sid': 'test'})()
-            
-            logger.info(f"SMS sent successfully to {to_number}. SID: {twilio_message.sid}")
+            twilio_message = client.messages.create(**message_params)
+            # twilio_message = type('obj', (), {'sid': 'test'})()
+            logger.info(f"SMS sent successfully to {to_number}. twilio message: {twilio_message}")
             return twilio_message.sid
             
         except TwilioRestException as e:
