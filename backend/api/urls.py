@@ -78,3 +78,14 @@ if settings.DEBUG:
         import debug_toolbar
 
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+
+
+# CORS Test Endpoint
+# ------------------------------------------------------------------------------
+from django.http import JsonResponse
+def cors_test_view(request):
+    return JsonResponse({"status": "ok"})
+
+urlpatterns += [
+    path("api/v1/test-cors/", cors_test_view),
+]
