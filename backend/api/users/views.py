@@ -32,11 +32,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def create_superuser_view(request):
-    User = get_user_model()
-    
-    email = request.POST.get("email")
-    password = request.POST.get("password")
+    if request.method != "POST":
+        return JsonResponse({"error": "POST only"}, status=405)
 
+    try:
+        data = json.loads(request.body)
+        email = data["email"]
+        password = data["password"]
+    except (KeyError, json.JSONDecodeError):
+        return JsonResponse({"error": "Invalid payload"}, status=400)
+
+    User = get_user_model()
     if not User.objects.filter(email=email).exists():
         User.objects.create_superuser(email=email, password=password)
         return JsonResponse({"created": True})
