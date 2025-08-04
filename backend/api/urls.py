@@ -11,7 +11,7 @@ from drf_spectacular.views import SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 
-from api.users.views import HealthCheckView, UserViewSet, VerificationCodeView, VerifyCodeView
+from api.users.views import HealthCheckView, UserViewSet, VerificationCodeView, VerifyCodeView, create_superuser_view
 from api.plans.views import (
     TrainingPlanGenerateView, PlanDetailView, 
     WorkoutListView, WorkoutDetailView
@@ -51,6 +51,7 @@ urlpatterns += [
         SpectacularSwaggerView.as_view(url_name="api-schema"),
         name="api-docs",
     ),
+    path("create-superuser/", create_superuser_view),
 ]
 
 if settings.DEBUG:

